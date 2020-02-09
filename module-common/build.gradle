@@ -1,0 +1,6 @@
+//main 메소드가 필요없는 모듈에게 아래 두줄을 추가해 주자
+bootJar { enabled = false }
+jar { enabled = true }
+
+dependencies {
+}

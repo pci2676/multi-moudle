@@ -1,0 +1,54 @@
+buildscript {
+	ext {
+		springBootVersion = '2.2.4.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath "io.spring.gradle:dependency-management-plugin:1.0.9.RELEASE"
+	}
+}
+
+//settings.gradle 에 속한 모든 프로젝트에게 공통적으로 적용되는 옵션
+subprojects {
+	group 'com.example'
+	version '1.0'
+
+	apply plugin: 'java'
+	apply plugin: 'org.springframework.boot'
+	apply plugin: 'io.spring.dependency-management'
+
+	sourceCompatibility = 1.8
+
+	repositories {
+		mavenCentral()
+	}
+
+	dependencies {
+		implementation('org.projectlombok:lombok')
+		annotationProcessor ('org.projectlombok:lombok')
+
+		implementation 'org.junit.jupiter:junit-jupiter'
+		testCompile group: 'org.assertj', name: 'assertj-core', version: '3.14.0'
+	}
+
+	test {
+		useJUnitPlatform()
+	}
+}
+
+//하위 프로젝트간의 의존성 관리
+project(':module-api') {
+	dependencies {
+		compile project(":module-core")
+	}
+}
+
+project(':module-core') {
+	dependencies {
+//		compile project(':module-common')
+	}
+}
+
