@@ -48,4 +48,16 @@ gradle 멀티 모듈 예제
     jar { enabled = true }
     ```
 
+- 루트 모듈에서 하위 모듈에 대한 의존성관리를 따로 할수 있다.
+
+    ```groovy
+    //하위 프로젝트간의 의존성 관리
+    project(':module-api') {
+    	dependencies {
+    		compile project(":module-core")
+    	}
+    }
+    ```
+
     
+
